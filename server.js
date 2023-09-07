@@ -81,3 +81,6 @@ server.delete('/user/:id', (req, res) => {
 server.listen({
     port: 3333
 })
+
+// https://www.youtube.com/watch?v=hHM-hr9q4mo
+// 50:37

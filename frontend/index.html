@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+</head>
+
+<body>
+    <div>
+        <h1>POST user</h1>
+        <input type="text" placeholder="name">
+        <input type="text" placeholder="email">
+        <input type="text" placeholder="born">
+        <button>post</button>
+    </div>
+    <div>
+        <h1>GET users</h1>
+        <div id="users">
+
+            <script>
+                async function getUsers() {
+                    try {
+                        const response = await fetch("http://localhost:3333/users");
+                        if (!response.ok) {
+                            throw new Error("Failed to fetch data");
+                        }
+                        const data = await response.json();
+                        return data;
+                    } catch (error) {
+                        console.error(error);
+                        return [];
+                    }
+                }
+
+
+                async function displayUsers() {
+                    const usersContainer = document.getElementById("users");
+                    const users = await getUsers();
+
+                    // Create an HTML list to display the users
+                    const ul = document.createElement("ul");
+
+                    // Loop through the users and create list items
+                    users.forEach((user) => {
+                        const li = document.createElement("li");
+                        li.textContent = user.name; // Adjust this to display the user data you need
+                        ul.appendChild(li);
+                    });
+
+                    // Append the list to the users container
+                    usersContainer.appendChild(ul);
+                }
+
+                // Call the displayUsers function to populate the list
+                displayUsers();
+            </script>
+
+        </div>
+        <button>get</button>
+    </div>
+    <div class="searchUser">
+        <input type="text" placeholder="id">
+        <button>search</button>
+    </div>
+</body>
+
+</html>
